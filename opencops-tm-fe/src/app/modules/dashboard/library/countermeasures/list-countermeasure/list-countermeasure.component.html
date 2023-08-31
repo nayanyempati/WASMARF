@@ -1,0 +1,80 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <div class="flex flex-col w-full mx-auto  ">
+        <div class="relative w-full flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between">
+            <mat-form-field class="opencops-mat-dense opencops-mat-no-subscript pt-4 min-w-60  mr-2">
+                <mat-icon matPrefix [svgIcon]="'mat_outline:search'"></mat-icon>
+                <input matInput [autocomplete]="'off'" #filter (keyup)="searchCountermeasure($event.target.value)"
+                    [placeholder]="'Search'">
+            </mat-form-field>
+            <button class="rounded" (click)="create()" matRipple mat-flat-button [color]="'primary'">
+                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                <span class="ml-2 mr-1 uppercase">Create Countermeasure</span>
+            </button>
+        </div>
+    </div>
+    <div class="flex flex-col flex-auto min-w-0">
+        <div class="bg-card rounded-t shadow border p-4">
+            <div class="mt-4">
+                <h2 class="font-bold text-2xl ">Countermeasures</h2>
+                <p class="text-gray-700 pt-2 text-sm">Countermeasures are proactive actions or strategies implemented to prevent, mitigate, or respond to security threats, vulnerabilities, or risks. Countermeasures
+                    can be mapped to a weakness or a component.</p>
+
+            </div>
+            <ng-container *ngIf="counterMeasureCount > 0; else noData">
+                <table class="mt-4 border border-collapse" mat-table matSort [multiTemplateDataRows]="true" [dataSource]="datasource"
+                    [trackBy]="trackByFn">
+                    <ng-container matColumnDef="CountermeasureId">
+                        <th class="dark:bg-gray-800 dark:bg-opacity-5 border-r" mat-header-cell *matHeaderCellDef>
+                            Id
+                        </th>
+                        <td mat-cell class="dark:bg-gray-800 py-4 border-r" *matCellDef="let item">
+                            <div class="flex items-center">
+                                C{{item.CountermeasureId}}
+                            </div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="CountermeasureName">
+                        <th class="dark:bg-gray-800 dark:bg-opacity-5 border-r" mat-header-cell *matHeaderCellDef>
+                            Name
+                        </th>
+                        <td mat-cell class="dark:bg-gray-800 py-4 border-r" *matCellDef="let item">
+                            <div class="flex items-center">
+                                <p class="text-blue-500 hover:text-blue-700 cursor-pointer  hover:underline"
+                                    [routerLink]="[item.CountermeasureId]"> {{item.CountermeasureName}}</p>
+
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Howto">
+                        <th class="dark:bg-gray-800 dark:bg-opacity-5" mat-header-cell *matHeaderCellDef>
+                            How-Tos
+                        </th>
+                        <td mat-cell class="dark:bg-gray-800 py-4" *matCellDef="let item">
+                            <div class="flex items-center">
+                                <ul class="list-disc pl-4">
+                                    <li *ngFor="let how of item.Howto">
+                                        {{how.HowToName}}
+
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                        </td>
+                    </ng-container>
+                    <tr mat-row *matRowDef="let item; columns: tableColumns;"
+                        class="hover:bg-slate-200 border dark:border-gray-600"></tr>
+                    <tr mat-header-row *matHeaderRowDef="tableColumns" class="border dark:border-gray-600"></tr>
+                </table>
+            </ng-container>
+            <ng-template #noData>
+                <div class="p-8 sm:p-16  text-4xl font-semibold tracking-tight text-center">There
+                    are no countermeasures</div>
+            </ng-template>
+        </div>
+
+        <mat-paginator class="sm:inset-x-0 rounded-b sm:bottom-0 border-b sm:border-t sm:border-b-0 z-10 bg-slate-200 shadow"
+            [pageSizeOptions]="[10,25, 50, 75, 100]" [showFirstLastButtons]="true"></mat-paginator>
+    </div>
+</div>

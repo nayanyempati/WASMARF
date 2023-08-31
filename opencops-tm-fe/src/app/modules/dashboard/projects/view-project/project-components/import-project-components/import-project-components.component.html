@@ -1,0 +1,25 @@
+<h2 class="text-lg font-bold border-b uppercase" mat-dialog-title>Import Component</h2>
+<mat-dialog-content class="mat-typography pt-4">
+    <form class="flex flex-col" [formGroup]="addForm">
+        <mat-form-field class="flex-auto">
+            <mat-label>Components:</mat-label>
+            <mat-select formControlName="ComponentId">
+                <mat-option *ngFor="let component of components" [value]="component.ComponentId">{{component.ComponentName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions class="bg-slate-200 border-t" align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <div class="flex items-center justify-end">
+        <button class="rounded" (click)="create()" mat-flat-button type="button" [color]="'primary'"
+            [disabled]="addForm.invalid">
+            <span class="uppercase" *ngIf="!addForm.disabled">
+                Add
+            </span>
+            <mat-progress-spinner *ngIf="addForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+            </mat-progress-spinner>
+        </button>
+    </div>
+</mat-dialog-actions>

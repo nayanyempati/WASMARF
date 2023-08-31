@@ -1,0 +1,103 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between    dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <a [routerLink]="['../']" class="whitespace-nowrap text-primary-500">Weaknesses</a>
+                <div *ngIf="weakness" class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_mini:chevron-right'"></mat-icon>
+                    <span class="truncate">{{weakness.WeaknessName | slice:0:40 }}{{
+                        weakness.WeaknessName.length > 40 ? '...' : ''}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex-auto">
+        <div class="border mt-4">
+            <div class=" bg-stone-800 p-2">
+                <div class="flex items-center justify-end">
+                    <button [routerLink]="['create']" class="rounded" mat-flat-button type="button" [color]="'warn'">
+                        <span class="uppercase">
+                            Delete Weakness
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white p-4">
+            <h2 class="text-2xl font-semibold pb-4 border-b">Edit Weakness</h2>
+            <form class="flex flex-col mt-4 " [formGroup]="weaknessForm">
+                <mat-form-field class="flex-auto">
+                    <mat-label>Name</mat-label>
+                    <input formControlName="WeaknessName" matInput required >
+                    <mat-error *ngIf="weaknessForm.get('WeaknessName').hasError('required')">
+                        Weakness is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="flex-auto">
+                    <mat-label>Priority</mat-label>
+                    <mat-select formControlName="WeaknessRiskRating" required >
+                        <mat-option *ngFor="let option of RiskRatings" [value]="option.value">
+                            {{ option.label }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="flex-auto">
+                    <mat-label>Category</mat-label>
+                    <mat-select formControlName="WeaknessCategory" required >
+
+                        <mat-option *ngFor="let category of Categories"
+                            [value]="category.CategoryName">{{category.CategoryName}}</mat-option>
+
+                    </mat-select>
+                </mat-form-field>
+
+
+                <mat-form-field class="flex-auto">
+                    <mat-label>Description</mat-label>
+                    <textarea required rows="6" #autoSizeTextarea matInput formControlName="WeaknessDescription"></textarea>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Countermeasures</mat-label>
+                    <div class="flex-col">
+                        <mat-chip-grid #chipGrid aria-label="Countermeasure selection">
+                            <mat-chip-row class="word-wrap-chip" *ngFor="let countermeasure of selectedCountermeasures"
+                                (removed)="remove(countermeasure)">
+                                {{ countermeasure.CountermeasureName }}
+                                <button matChipRemove [attr.aria-label]="'remove ' + countermeasure.CountermeasureName">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </mat-chip-row>
+                        </mat-chip-grid>
+                        <input required  #countermeasureInput class="py-4"
+                            [formControl]="countermeasureCtrl" [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)" />
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="add($event)">
+                            <mat-option *ngFor="let countermeasure of filteredCountermeasure | async"
+                                [value]="countermeasure">
+                                {{ countermeasure }}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </div>
+
+                </mat-form-field>
+            </form>
+
+
+        </div>
+        <div class="flex items-center justify-end bg-slate-200 p-4">
+            <button class="rounded" (click)="updateWeakness()" mat-flat-button type="button" [color]="'primary'"
+                [disabled]="weaknessForm.invalid">
+                <span class="uppercase" *ngIf="!weaknessForm.disabled">
+                    Save
+                </span>
+                <mat-progress-spinner *ngIf="weaknessForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+                </mat-progress-spinner>
+            </button>
+        </div>
+    </div>
+</div>

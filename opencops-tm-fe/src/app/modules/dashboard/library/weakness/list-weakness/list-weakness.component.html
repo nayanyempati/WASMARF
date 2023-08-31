@@ -1,0 +1,112 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <div class="flex flex-col w-full mx-auto  ">
+        <div class="relative w-full flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between">
+            <mat-form-field class="opencops-mat-dense opencops-mat-no-subscript pt-4 min-w-60  mr-2">
+                <mat-icon matPrefix [svgIcon]="'mat_outline:search'"></mat-icon>
+                <input matInput [autocomplete]="'off'" #filter (keyup)="searchWeakness($event.target.value)"
+                    [placeholder]="'Search'">
+            </mat-form-field>
+            <button class="rounded" (click)="CreateWeakness()" matRipple mat-flat-button [color]="'primary'">
+                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                <span class="ml-2 mr-1 uppercase">Create Weakness</span>
+            </button>
+        </div>
+    </div>
+    <div class="flex flex-col flex-auto min-w-0">
+        <div class="bg-card  rounded shadow border p-4">
+            <div class="mt-4">
+                <h2 class="font-bold text-2xl uppercase">Weakness</h2>
+                <p class="text-gray-700 pt-2 text-sm">Weakness in security refers to vulnerabilities or flaws in systems
+                    or
+                    software that can be exploited by attackers, risking data breaches or unauthorized access. Weakness
+                    can be mapped to a component or a survey question.</p>
+
+            </div>
+            <ng-container *ngIf="weaknessCount > 0; else noWeakness">
+                <table class="mt-4 border border-collapse" mat-table matSort [multiTemplateDataRows]="true"
+                    [dataSource]="datasource" [trackBy]="trackByFn">
+                    <ng-container matColumnDef="WeaknessId">
+                        <th class="dark:bg-gray-800 dark:bg-opacity-5 border-r" mat-header-cell *matHeaderCellDef>
+                            Id
+                        </th>
+                        <td mat-cell class="dark:bg-gray-800 py-4 border-r" *matCellDef="let item">
+                            <div class="flex items-center">
+                                W{{item.WeaknessId}}
+                            </div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="WeaknessName">
+                        <th class="dark:bg-gray-800 dark:bg-opacity-5 border-r" mat-header-cell *matHeaderCellDef>
+                            Name
+                        </th>
+                        <td mat-cell class="dark:bg-gray-800 py-4 border-r" *matCellDef="let item">
+                            <div class="flex items-center">
+                                <p class="text-blue-500 hover:text-blue-700 cursor-pointer  hover:underline"
+                                    [routerLink]="[item.WeaknessId]"> {{item.WeaknessName}}</p>
+                            </div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="WeaknessCwes">
+                        <th class="dark:bg-gray-800 dark:bg-opacity-5 border-r" mat-header-cell *matHeaderCellDef>
+                            CWE Id's
+                        </th>
+                        <td mat-cell class="dark:bg-gray-800 py-4 border-r" *matCellDef="let item">
+                            <div class="flex items-center">
+                                <ul class=" px-4">
+                                    <li *ngFor="let cwe of item.WeaknessCwes.split(';')">
+                                        <p class="text-blue-500 hover:text-blue-700 cursor-pointer  hover:underline"
+                                            (click)="openCwe(cwe);">
+                                            {{cwe}}</p>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="WeaknessRiskRating">
+                        <th class="dark:bg-gray-800 dark:bg-opacity-5 border-r" mat-header-cell *matHeaderCellDef
+                            mat-sort-header>
+                            Risk Rating
+                        </th>
+                        <td mat-cell class="dark:bg-gray-800 py-4 border-r" *matCellDef="let item">
+                            <div class="flex items-center">
+                                {{item.WeaknessRiskRating}}
+                            </div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Countermeasures">
+                        <th class="dark:bg-gray-800 dark:bg-opacity-5 border-r" mat-header-cell *matHeaderCellDef>
+                            Countermeasures
+                        </th>
+                        <td mat-cell class="dark:bg-gray-800 py-4 border-r" *matCellDef="let item">
+                            <div class="flex items-center">
+                                <ul class="list-disc px-4">
+                                    <li *ngFor="let counter of item.Countermeasures">
+
+                                        <p class="text-blue-500 hover:text-blue-700 cursor-pointer  hover:underline"
+                                            [routerLink]="['../countermeasures/'+counter.CountermeasureId]">
+                                            C{{counter.CountermeasureId}}:{{counter.CountermeasureName}}</p>
+
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                        </td>
+                    </ng-container>
+                    <tr mat-row *matRowDef="let item; columns: tableColumns;"
+                        class="hover:bg-slate-200 border dark:border-gray-600"></tr>
+                    <tr mat-header-row *matHeaderRowDef="tableColumns" class="border dark:border-gray-600"></tr>
+                </table>
+            </ng-container>
+            <ng-template #noWeakness>
+                <div class="p-8 sm:p-16  text-4xl font-semibold tracking-tight text-center">There
+                    are no weakness</div>
+            </ng-template>
+        </div>
+
+        <mat-paginator
+            class="sm:inset-x-0 rounded-b bg-slate-200 sm:bottom-0 border-b sm:border-t sm:border-b-0 z-10 bg-slate-200 border-b shadow"
+            [pageSizeOptions]="[10,25, 50, 75, 100]" [showFirstLastButtons]="true"></mat-paginator>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between    dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <a [routerLink]="['../../../']" class="whitespace-nowrap text-primary-500">Projects</a>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_mini:chevron-right'"></mat-icon>
+                    <a [routerLink]="['../../overview']" *ngIf="projectDetails"
+                        class="ml-1 text-primary-500">{{projectDetails.ProjectName}} </a>
+                </div>
+
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_mini:chevron-right'"></mat-icon>
+                    <a [routerLink]="['../']" *ngIf="projectDetails" class="ml-1 text-primary-500">Weakness</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_mini:chevron-right'"></mat-icon>
+                    <a *ngIf="weaknessDetails" class="ml-1 ">{{weaknessDetails.WeaknessName}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex-auto">
+        <div *ngIf="weaknessDetails"
+            class="relative flex flex-col flex-auto p-6 pr-3 mt-4 pb-3 bg-card rounded shadow overflow-hidden">
+            <div class="flex items-center">
+                <div class="flex flex-col">
+                    <div class="text-lg font-bold tracking-tight leading-6 truncate uppercase">
+                        {{weaknessDetails.WeaknessName}}
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-row flex-wrap mt-4 -mx-6">
+                <div class="flex flex-col mx-6 my-3">
+                    <div class="text-lg font-bold leading-none py-2">Name:
+                    </div>
+                    <div class="text-lg  pb-4">
+                        {{weaknessDetails.WeaknessName}}
+                    </div>
+
+                    <div class="text-lg font-bold leading-none py-2">Description:
+                    </div>
+                    <div class="text-lg    pb-4">
+                        {{weaknessDetails.WeaknessDescription}}
+                    </div>
+
+                    <div class="text-lg font-bold leading-none py-2">Category:
+                    </div>
+                    <div class="text-lg    pb-4">
+                        {{weaknessDetails.WeaknessCategory}}
+                    </div>
+
+                    <div class="text-lg font-bold leading-none py-2">Risk Rating:
+                    </div>
+                    <div class="text-lg    pb-4">
+                        {{weaknessDetails.WeaknessRiskRating}}
+                    </div>
+
+                    <div class="text-lg font-bold leading-none py-2">CWE:
+                    </div>
+                    <div class="text-lg pb-4">
+                        <span *ngFor="let cwe of weaknessDetails.WeaknessCwes.split(';')">
+                            <span class="text-blue-500 hover:text-blue-700 cursor-pointer  hover:underline mr-2"
+                                (click)="openCwe(cwe);">{{cwe}}</span>
+                        </span>
+                    </div>
+                    <div class="text-lg font-bold leading-none py-2">Countermeasures:
+                    </div>
+                    <div class="text-lg pb-4">
+                        <ul>
+                            <li *ngFor="let countermeasure of countermeasures">
+                                <p class="text-blue-500 hover:text-blue-700 cursor-pointer  hover:underline"
+                                    [routerLink]="['countermeasures/'+countermeasure.CountermeasureId]">
+                                    {{countermeasure.CountermeasureName}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

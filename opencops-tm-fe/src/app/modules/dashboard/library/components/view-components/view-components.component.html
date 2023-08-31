@@ -1,0 +1,83 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between    dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <a [routerLink]="['../']" class="whitespace-nowrap text-primary-500">Components</a>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_mini:chevron-right'"></mat-icon>
+                    <a *ngIf="component" class="ml-1 ">{{component.ComponentName}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div *ngIf="component" class="flex-auto ">
+        <div class="bg-card rounded border p-4 mt-4">
+            <h2 class="text-2xl font-semibold">{{component.ComponentName}}</h2>
+            <p><span class="font-semibold text-gray-800">Status:</span>
+                <ng-container *ngIf="component.ComponentStatus==true; else notActive">
+                    Activated
+                </ng-container>
+                <ng-template #notActive>
+                    Not Activated
+                </ng-template>
+            </p>
+            <p><span class="font-semibold text-gray-800">Type:</span> {{component.ComponentType}}</p>
+            <div class="relative w-full flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between">
+                <mat-form-field class="opencops-mat-dense opencops-mat-no-subscript pt-4 min-w-60  mr-2">
+                    <mat-icon matPrefix [svgIcon]="'mat_outline:search'"></mat-icon>
+                    <input matInput [autocomplete]="'off'" #filter (keyup)="searchComponent($event.target.value)"
+                        [placeholder]="'Search'">
+                </mat-form-field>
+                <button class="rounded" (click)="ImportWeakness()" matRipple mat-flat-button [color]="'primary'">
+                    <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                    <span class="ml-2 mr-1 uppercase">Import Weakness</span>
+                </button>
+            </div>
+
+            <div class="flex flex-col flex-auto min-w-0">
+                <ng-container *ngIf="weaknesscount > 0; else noData">
+                    <table class="mt-4  border-collapse" mat-table matSort [multiTemplateDataRows]="true"
+                        [dataSource]="datasource" [trackBy]="trackByFn">
+                        <ng-container matColumnDef="WeaknessName">
+                            <th class="dark:bg-gray-800 dark:bg-opacity-5 " mat-header-cell *matHeaderCellDef>
+                                Weakness
+                            </th>
+                            <td mat-cell class="dark:bg-gray-800 py-4 " *matCellDef="let item">
+                                <div class="flex items-center">
+                                    {{item.WeaknessName}}
+                                </div>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Action">
+                            <th class="dark:bg-gray-800 dark:bg-opacity-5 " mat-header-cell *matHeaderCellDef>
+
+                            </th>
+                            <td mat-cell class="dark:bg-gray-800 py-4 " *matCellDef="let item">
+                                <div class="flex items-center">
+                                    <mat-icon (click)="deleteWeakness(item)"
+                                        class="icon-size-5 text-secondary cursor-pointer"
+                                        [svgIcon]="'heroicons_mini:trash'"></mat-icon>
+                                </div>
+                            </td>
+                        </ng-container>
+                        <tr mat-row *matRowDef="let item; columns: tableColumns;"
+                            class="hover:bg-slate-200 border dark:border-gray-600"></tr>
+                        <tr mat-header-row *matHeaderRowDef="tableColumns" class="border dark:border-gray-600"></tr>
+                    </table>
+                </ng-container>
+                <ng-template #noData>
+                    <div class="p-8 sm:p-16  text-4xl font-semibold tracking-tight text-center">There
+                        are no weakness</div>
+                </ng-template>
+
+                <mat-paginator
+                    class="sm:inset-x-0 rounded-b bg-slate-200 sm:bottom-0 border-b sm:border-t sm:border-b-0 z-10 bg-slate-200 shadow"
+                    [pageSizeOptions]="[10,25, 50, 75, 100]" [showFirstLastButtons]="true"></mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>

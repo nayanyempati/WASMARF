@@ -1,0 +1,45 @@
+<h2 class="text-lg font-bold border-b uppercase" mat-dialog-title>Create Project</h2>
+<mat-dialog-content class="mat-typography pt-4">
+    <form class="flex flex-col" [formGroup]="addForm">
+        <mat-form-field class="flex-auto max-w-lg">
+            <mat-label>Name</mat-label>
+            <input min="8" formControlName="ProjectName" matInput required>
+        </mat-form-field>
+        <mat-form-field class="flex-auto w-full ">
+            <mat-label>Description</mat-label>
+            <textarea rows="3" formControlName="ProjctDescription" matInput></textarea>
+        </mat-form-field>
+        <mat-form-field class="flex-auto">
+            <mat-label>Risk Policy</mat-label>
+            <mat-select formControlName="RiskPolicyId" required >
+                <mat-option *ngFor="let option of riskPolicies" [value]="option.RiskPolicyId">
+                    {{ option.RiskPolicyName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="flex-auto">
+            <mat-label>Profile</mat-label>
+            <mat-select formControlName="ProfileId" required >
+                <mat-option *ngFor="let profile of profiles" [value]="profile.ProfileId">
+                    {{ profile.ProfileName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions class="bg-slate-200 border-t" align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <div class="flex items-center justify-end">
+        <button class="rounded" (click)="create()" mat-flat-button type="button" [color]="'primary'"
+            [disabled]="addForm.invalid">
+            <span class="uppercase" *ngIf="!addForm.disabled">
+                Create
+            </span>
+            <mat-progress-spinner *ngIf="addForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+            </mat-progress-spinner>
+        </button>
+    </div>
+</mat-dialog-actions>

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\opencops-tm-bo.props" />
+</Project>

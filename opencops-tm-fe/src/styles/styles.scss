@@ -1,0 +1,83 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import/write your custom styles here.
+/*  @ Styles from this file will override 'vendors.scss' and Opencops's base styles.
+/* ----------------------------------------------------------------------------------------------------- */
+.grecaptcha-badge {
+    display: none !important;
+}
+
+@media (min-width: 1356px) {
+
+    /* Set the container width to 60% of the screen width */
+    .custom-container {
+        width: 60%;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+}
+
+
+.snack-success {
+    border-left-color: rgb(23, 141, 23);
+    border-left-width: 10px;
+    border-left-style: solid;
+    border-radius: 10px !important;
+    color: #FFF !important;
+    background-color: rgb(23, 141, 23) !important;
+}
+
+.snack-error {
+    border-left-color: rgb(146, 11, 11);
+    border-left-width: 10px;
+    border-left-style: solid;
+    color: #FFF !important;
+    border-radius: 10px !important;
+    background-color: rgb(146, 11, 11) !important;
+}
+
+.snack-warning {
+    border-left-color: #F09D0F;
+    border-left-width: 10px;
+    border-left-style: solid;
+    color: #FFF !important;
+    border-radius: 10px !important;
+    background-color: #F09D0F !important;
+}
+.mdc-data-table__cell,.mdc-button{
+    font-size: 0.8125rem !important;
+}
+
+.mdc-evolution-chip__text-label {
+    white-space:break-spaces !important ;
+}
+
+.mat-mdc-chip.mat-mdc-standard-chip {
+    height: 52px !important;
+}
+
+.mat-mdc-dialog-container, .mat-mdc-dialog-container .mdc-dialog__container, .mat-mdc-dialog-container .mdc-dialog__surface{
+    border-radius: 0px !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+     padding: 0px !important; 
+}
+
+body {
+    background: #f2f5f9;
+    min-width: 960px;
+    font-family: "Roboto",sans-serif !important;
+    font-size: 14px;
+    font-weight: normal;
+    color: rgba(0,0,0,.87);
+    margin: 0;
+}
+.mat-mdc-button.mat-mdc-button-base, .mat-mdc-raised-button.mat-mdc-button-base, .mat-mdc-unelevated-button.mat-mdc-button-base, .mat-mdc-outlined-button.mat-mdc-button-base {
+    border-radius: 5px !important;
+    margin-right: 10px !important;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+    background: #FFF !important;
+}

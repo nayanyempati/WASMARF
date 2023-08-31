@@ -1,0 +1,101 @@
+<div class="flex flex-col flex-auto min-w-0">
+ 
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between    dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <a [routerLink]="['../../']" class="whitespace-nowrap text-primary-500">Projects</a>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_mini:chevron-right'"></mat-icon>
+                    <a *ngIf="projectDetails" class="ml-1 ">{{projectDetails.ProjectName}} </a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_mini:chevron-right'"></mat-icon>
+                    <a *ngIf="projectDetails" class="ml-1">Overview</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
+            <button (click)="CreateReport()"
+                mat-flat-button
+                [color]="'primary'">
+                <mat-icon
+                    class="icon-size-5 text-white"
+                    [svgIcon]="'heroicons_solid:document'"></mat-icon>
+                <span class="ml-2">Report</span>
+            </button>
+        </div>
+    </div>
+    <mat-progress-bar class=" rounded-2xl" [color]="accent" *ngIf="download$ | async as download"
+    [mode]="download.state"></mat-progress-bar>
+
+    <!-- Main -->
+    <div *ngIf="projectDetails" class="flex-auto ">
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 w-full mt-8">
+            <div class="grid gap-8 sm:grid-flow-col xl:grid-flow-row">
+                <div class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded shadow overflow-hidden">
+                    <div class="flex items-center">
+                        <div class="flex flex-col">
+                            <div class="text-lg font-bold tracking-tight leading-6 truncate">PROJECT DETAILS</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-row flex-wrap mt-4 -mx-6">
+                        <div class="flex flex-col mx-6 my-3">
+                            <div class="text-lg font-bold leading-none py-2">Project Id : <span
+                                    class="text-lg font-medium leading-none text-secondary ">Pro-{{projectDetails.ProjectId}}</span>
+                            </div>
+                            <div class="text-lg font-bold leading-none py-2">Name : <span
+                                    class="text-lg font-medium leading-none text-secondary ">{{projectDetails.ProjectName}}</span>
+                            </div>
+                            <div class="text-lg font-bold leading-none py-2">Risk Policy : <span
+                                    class="text-lg font-medium leading-none text-secondary ">{{projectDetails.RiskPolicyName}}</span>
+                            </div>
+                            <div class="text-lg font-bold leading-none py-2">Description : <span
+                                    class="text-lg font-medium leading-none text-secondary ">{{projectDetails.ProjctDescription}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded shadow overflow-hidden">
+                    <div class="flex items-start justify-between">
+                        <div class="flex flex-col">
+                            <div class="text-lg font-bold tracking-tight leading-6 truncate">COMPONENTS</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center mt-6">
+                        <div class="text-9xl font-bold tracking-tight leading-none text-blue-500">{{componentsCount}}</div>
+                    </div>
+                </div>
+
+                <div class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded shadow overflow-hidden">
+                    <div class="flex items-start justify-between">
+                        <div class="flex flex-col">
+                            <div class="text-lg font-bold tracking-tight leading-6 truncate">WEAKNESS</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center mt-6">
+                        <div class="text-9xl font-bold tracking-tight leading-none text-red-500">{{weaknessCount}}</div>
+                    </div>
+                </div>
+
+                <div class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded shadow overflow-hidden">
+                    <div class="flex items-start justify-between">
+                        <div class="flex flex-col">
+                            <div class="text-lg font-bold tracking-tight leading-6 truncate">COUNTERMEASURES</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center mt-6">
+                        <div class="text-9xl font-bold tracking-tight leading-none text-orange-500">{{weaknessCount}}</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

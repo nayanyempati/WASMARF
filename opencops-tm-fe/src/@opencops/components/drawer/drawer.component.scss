@@ -1,0 +1,133 @@
+/* Variables */
+:root {
+    --opencops-drawer-width: 320px;
+}
+
+opencops-drawer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: var(--opencops-drawer-width);
+    min-width: var(--opencops-drawer-width);
+    max-width: var(--opencops-drawer-width);
+    z-index: 300;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .35);
+    @apply bg-card;
+
+    /* Animations */
+    &.opencops-drawer-animations-enabled {
+        transition-duration: 400ms;
+        transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+        transition-property: visibility, margin-left, margin-right, transform, width, max-width, min-width;
+
+        .opencops-drawer-content {
+            transition-duration: 400ms;
+            transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition-property: width, max-width, min-width;
+        }
+    }
+
+    /* Over mode */
+    &.opencops-drawer-mode-over {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+
+        /* Fixed mode */
+        &.opencops-drawer-fixed {
+            position: fixed;
+        }
+    }
+
+    /* Left position */
+    &.opencops-drawer-position-left {
+
+        /* Side mode */
+        &.opencops-drawer-mode-side {
+            margin-left: calc(var(--opencops-drawer-width) * -1);
+
+            &.opencops-drawer-opened {
+                margin-left: 0;
+            }
+        }
+
+        /* Over mode */
+        &.opencops-drawer-mode-over {
+            left: 0;
+            transform: translate3d(-100%, 0, 0);
+
+            &.opencops-drawer-opened {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        /* Content */
+        .opencops-drawer-content {
+            left: 0;
+        }
+    }
+
+    /* Right position */
+    &.opencops-drawer-position-right {
+
+        /* Side mode */
+        &.opencops-drawer-mode-side {
+            margin-right: calc(var(--opencops-drawer-width) * -1);
+
+            &.opencops-drawer-opened {
+                margin-right: 0;
+            }
+        }
+
+        /* Over mode */
+        &.opencops-drawer-mode-over {
+            right: 0;
+            transform: translate3d(100%, 0, 0);
+
+            &.opencops-drawer-opened {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        /* Content */
+        .opencops-drawer-content {
+            right: 0;
+        }
+    }
+
+    /* Content */
+    .opencops-drawer-content {
+        position: absolute;
+        display: flex;
+        flex: 1 1 auto;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        @apply bg-card;
+    }
+}
+
+/* Overlay */
+.opencops-drawer-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 299;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.6);
+
+    /* Fixed mode */
+    &.opencops-drawer-overlay-fixed {
+        position: fixed;
+    }
+
+    /* Transparent overlay */
+    &.opencops-drawer-overlay-transparent {
+        background-color: transparent;
+    }
+}

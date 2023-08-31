@@ -1,0 +1,90 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between    dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <a [routerLink]="['../../../../../']" class="whitespace-nowrap text-primary-500">Survey</a>
+                <div *ngIf="subsection" class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_mini:chevron-right'"></mat-icon>
+                    <a [routerLink]="['../../../../']" class="ml-1  text-primary-500">{{subsection.SectionName}}</a>
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_mini:chevron-right'"></mat-icon>
+                    <a [routerLink]="['../../']" class="ml-1  text-primary-500">{{subsection.SubsectionName}}</a>
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_mini:chevron-right'"></mat-icon>
+                    <span>New Question</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex flex-col w-full mx-auto ">
+        <div class="bg-card rounded border p-4 mt-4">
+            <div
+                class="text-2xl pb-4 border-b pb-4 font-bold tracking-tight leading-7 md:leading-snug truncate uppercase">
+                Create New Question</div>
+            <div class="p-4 max-w-2xl">
+                <form class="flex flex-col" [formGroup]="addForm">
+                    <mat-form-field class="flex-auto">
+                        <mat-label>Question</mat-label>
+                        <input formControlName="SurveyQuestion" matInput required >
+                        <mat-error *ngIf="addForm.get('SurveyQuestion').hasError('required')">
+                            Question is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="flex-auto ">
+                        <mat-label>Question Description</mat-label>
+                        <textarea formControlName="SurveyQuestionDescription" matInput required></textarea>
+                        <mat-error *ngIf="addForm.get('SurveyQuestionDescription').hasError('required')">
+                            Question description is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="flex-auto ">
+                        <mat-label>Format</mat-label>
+                        <mat-select required 
+                            (selectionChange)="onSelectionChange($event.value)" formControlName="SurveyQuestionFormat">
+                            <mat-option value="Multiple" selected>Multiple Choice</mat-option>
+                            <mat-option value="Single">Single Choice</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <opencops-alert *ngIf="selectedFormat=='Multiple'" [type]="'accent'" [appearance]="'outline'">
+                        A multiple choice question is one where the user can pick any number of the supplied answers.
+                        Each answer is presented to the user as a check box.
+                    </opencops-alert>
+                    <opencops-alert *ngIf="selectedFormat=='Single'" [type]="'accent'" [appearance]="'outline'">
+                        A single choice question is one where the user can only pick one of the supplied answers. Each
+                        answer will be presented to the user as a radio-button.
+                    </opencops-alert>
+
+                    <h2 class="text-2xl font-semibold pt-4 pb-4 border-b">Answers</h2>
+                    <mat-form-field class="flex-auto" *ngFor="let answer of Answers; let i = index">
+                        <input readonly value="{{answer}}" matInput>
+                        <mat-icon class="cursor-pointer" svgIcon="heroicons_mini:trash"
+                            (click)="DeleteAnswer(i)"></mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto">
+                        <input #answerInput formControlName="Answers" matInput  >
+                        <mat-icon class="cursor-pointer" svgIcon="heroicons_mini:plus-circle"
+                            (click)="addAnswerField(answerInput.value)"></mat-icon>
+                    </mat-form-field>
+                </form>
+            </div>
+        </div>
+        <div class="bg-slate-200 border-b shadow p-4">
+            <div class="flex items-center justify-end">
+                <button class="rounded" (click)="CreateQuestion()" mat-flat-button type="button" [color]="'primary'"
+                    [disabled]="addForm.invalid">
+                    <span class="uppercase" *ngIf="!addForm.disabled">
+                        Create
+                    </span>
+                    <mat-progress-spinner *ngIf="addForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+                    </mat-progress-spinner>
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,109 @@
+<!-- Wrapper -->
+<div class="flex flex-col flex-auto w-full min-w-0">
+    <!-- Content -->
+    <div class="flex flex-col flex-auto w-full">
+        <!-- *ngIf="true" hack is required here for router-outlet to work correctly.
+             Otherwise, layout changes won't be registered and the view won't be updated! -->
+
+        <div class="flex flex-col w-full  mx-auto">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center  px-2 md:px-6  p-4 min-w-0">
+                <div class="flex flex-col flex-auto min-w-0">
+                    <!-- Header -->
+                    <div
+                        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between    dark:bg-transparent">
+                        <div class="flex-1 min-w-0">
+                            <!-- Breadcrumbs -->
+                            <div class="flex flex-wrap items-center font-medium">
+                                Dashboard
+                                <div class="flex items-center ml-1 whitespace-nowrap">
+                                    <mat-icon class="icon-size-5 text-secondary"
+                                        [svgIcon]="'heroicons_mini:chevron-right'"></mat-icon>
+                                    Overview
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main -->
+                    <div *ngIf="details" class="flex-auto ">
+                        <div class="p-4 mt-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full min-w-0">
+                                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                    <div class="flex items-start justify-between">
+                                        <div class="text-lg font-medium tracking-tight uppercase leading-6 truncate">Projects
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center mt-4">
+                                        <div
+                                            class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-gray-500">
+                                            {{details.Projects}}</div>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                    <div class="flex items-start justify-between">
+                                        <div class="text-lg font-medium tracking-tight uppercase leading-6 truncate">Weakness
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center mt-4">
+                                        <div
+                                            class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-stoned-500">
+                                            {{details.Weakness}}</div>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                    <div class="flex items-start justify-between">
+                                        <div class="text-lg font-medium tracking-tight uppercase leading-6 truncate">Countermeasures
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center mt-4">
+                                        <div
+                                            class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-slate-500">
+                                            {{details.Countermeasures}}</div>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                    <div class="flex items-start justify-between">
+                                        <div class="text-lg font-medium tracking-tight uppercase leading-6 truncate">Classifications
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center mt-4">
+                                        <div
+                                            class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-zinc-500">
+                                            {{details.Classifications}}</div>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                    <div class="flex items-start justify-between">
+                                        <div class="text-lg font-medium tracking-tight uppercase leading-6 truncate">Phases
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center mt-4">
+                                        <div
+                                            class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-neutral-500">
+                                            {{details.Phases}}</div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                    <div class="flex items-start justify-between">
+                                        <div class="text-lg font-medium tracking-tight uppercase leading-6 truncate">Categories
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center mt-4">
+                                        <div
+                                            class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-gray-500">
+                                            {{details.Categories}}</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

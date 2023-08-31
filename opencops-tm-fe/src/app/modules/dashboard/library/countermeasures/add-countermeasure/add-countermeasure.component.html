@@ -1,0 +1,59 @@
+<h2 class="text-lg font-bold border-b uppercase" mat-dialog-title>Create Countermeasure</h2>
+<mat-dialog-content class="mat-typography pt-4">
+    <form class="flex flex-col mt-4 " [formGroup]="addForm">
+
+        <mat-form-field class="flex-auto">
+            <mat-label>Select Weakness</mat-label>
+            <mat-select formControlName="WeaknessId" required>
+                <mat-option *ngFor="let weakness of Weakensses" [value]="weakness.WeaknessId">
+                    {{ weakness.WeaknessName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="flex-auto">
+            <mat-label>Name</mat-label>
+            <input formControlName="CountermeasureName" matInput required>
+            <mat-error *ngIf="addForm.get('CountermeasureName').hasError('required')">
+                Countermeasure is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="flex-auto">
+            <mat-label>Priority</mat-label>
+            <mat-select formControlName="CountermeasurePriority" required>
+                <mat-option *ngFor="let option of Priorities" [value]="option.value">
+                    {{ option.label }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="flex-auto">
+            <mat-label>Phase</mat-label>
+            <mat-select formControlName="CountermeasurePriority" required>
+                <mat-option *ngFor="let Phase of Phases" [value]="Phase.PhaseName">
+                    {{ Phase.PhaseName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="flex-auto">
+            <mat-label>Solution</mat-label>
+            <textarea rows="6" #autoSizeTextarea matInput formControlName="CountermeasureSolution"></textarea>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions class="bg-slate-200" align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <div class="flex items-center justify-end">
+        <button class="rounded" (click)="create()" mat-flat-button type="button" [color]="'primary'"
+            [disabled]="addForm.invalid">
+            <span class="uppercase" *ngIf="!addForm.disabled">
+                Create
+            </span>
+            <mat-progress-spinner *ngIf="addForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+            </mat-progress-spinner>
+        </button>
+    </div>
+</mat-dialog-actions>

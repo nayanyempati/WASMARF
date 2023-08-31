@@ -1,0 +1,119 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between    dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <a [routerLink]="['../']" class="whitespace-nowrap text-primary-500">Survey</a>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_mini:chevron-right'"></mat-icon>
+                    <a *ngIf="Survey" class="ml-1 ">{{Survey.SectionName}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div *ngIf="Survey" class="flex-auto ">
+        <div class="border mt-4">
+            <div class=" bg-stone-800 p-2">
+                <div class="flex items-center justify-end">
+                    <button class="rounded mr-2" mat-flat-button type="" [color]="'warn'">
+                        <span class="uppercase">
+                            Delete Section
+                        </span>
+                    </button>
+                    <button [routerLink]="['create']" class="rounded" mat-flat-button type="button" [color]="'primary'">
+                        <span class="uppercase">
+                            Create Subsection
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="bg-white p-4 ">
+                <h2 class="text-2xl font-semibold pb-4 border-b">Edit Section</h2>
+
+                <form class="flex flex-col mt-4" [formGroup]="updateForm">
+                    <mat-form-field class="flex-auto max-w-lg">
+                        <mat-label>Name</mat-label>
+                        <input formControlName="SectionName" matInput required
+                            >
+                        <mat-error *ngIf="updateForm.get('SectionName').hasError('required')">
+                            Section name is required
+                        </mat-error>
+                    </mat-form-field>
+                </form>
+                <h2 class="text-2xl font-semibold pb-4 border-b">Subsections</h2>
+                <ng-container *ngIf="subsectionCount > 0; else noData">
+                    <table class="mt-4 border border-collapse" mat-table matSort [multiTemplateDataRows]="true"
+                        [dataSource]="datasource" [trackBy]="trackByFn">
+                        <ng-container matColumnDef="Order">
+                            <th class="dark:bg-gray-800 border-r dark:bg-opacity-5" mat-header-cell *matHeaderCellDef>
+                                Id
+                            </th>
+                            <td mat-cell class="dark:bg-gray-800 border-r py-4" *matCellDef="let item">
+                                <div class="flex items-center">
+
+                                </div>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="SubsectionName">
+                            <th class="dark:bg-gray-800 border-r dark:bg-opacity-5" mat-header-cell *matHeaderCellDef>
+                                Subsections
+                            </th>
+                            <td mat-cell class="dark:bg-gray-800 border-r py-4" *matCellDef="let item">
+                                <div class="flex items-center">
+                                    <p class="text-blue-500 hover:text-blue-700 cursor-pointer  hover:underline"
+                                        [routerLink]="['subsections/'+item.SubsectionId]"> {{item.SubsectionName}}</p>
+
+                                </div>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="MoveSubsection">
+                            <th class="dark:bg-gray-800 dark:bg-opacity-5" mat-header-cell *matHeaderCellDef>
+                                Move this Subsection to different Section..
+                            </th>
+                            <td mat-cell class="dark:bg-gray-800 py-4" *matCellDef="let item">
+                                <div class="flex items-center">
+                                    N/A
+                                </div>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Action">
+                            <th class="dark:bg-gray-800 dark:bg-opacity-5" mat-header-cell *matHeaderCellDef>
+
+                            </th>
+                            <td mat-cell class="dark:bg-gray-800 py-4" *matCellDef="let item">
+                                <div class="flex items-center">
+                                    N/A
+                                </div>
+                            </td>
+                        </ng-container>
+                        <tr mat-row *matRowDef="let row; let even = even; columns: tableColumns;"
+                            class=" border dark:border-gray-600 "></tr>
+                        <tr mat-header-row *matHeaderRowDef="tableColumns" class="border dark:border-gray-600 "></tr>
+                    </table>
+                </ng-container>
+                <ng-template #noData>
+                    <div class="p-8 sm:p-16  text-4xl font-semibold tracking-tight text-center">There
+                        are no survey sections</div>
+                </ng-template>
+                <div class="bg-slate-200 shadow border py-4">
+                    <div class="flex items-center justify-end mr-2">
+                        <button class="rounded" (click)="Updatesection()" mat-flat-button type="button"
+                            [color]="'primary'" [disabled]="updateForm.invalid">
+                            <span class="uppercase" *ngIf="!updateForm.disabled">
+                                Save Section
+                            </span>
+                            <mat-progress-spinner *ngIf="updateForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+                            </mat-progress-spinner>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

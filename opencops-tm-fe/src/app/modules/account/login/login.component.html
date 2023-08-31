@@ -1,0 +1,60 @@
+<div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
+    <!-- Title -->
+    <div class="mt-8 text-2xl font-bold tracking-tight leading-tight">Login to Account</div>
+    <div class="flex items-baseline mt-0.5 font-medium">
+        <div>Don't have an account?</div>
+        <a class="ml-1 text-primary-500 hover:underline" [routerLink]="['/account/register']">Register
+        </a>
+    </div>
+
+
+    <!-- Sign in form -->
+    <form class="mt-8" [formGroup]="signInForm" #signInNgForm="ngForm">
+
+        <!-- Email field -->
+        <mat-form-field class="w-full">
+            <mat-label>Email address</mat-label>
+            <input id="Email" matInput [formControlName]="'Email'">
+            <mat-error *ngIf="signInForm.get('Email').hasError('required')">
+                Email address is required
+            </mat-error>
+            <mat-error *ngIf="signInForm.get('Email').hasError('email')">
+                Please enter a valid email address
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Password field -->
+        <mat-form-field class="w-full">
+            <mat-label>Password</mat-label>
+            <input id="Password" matInput type="password" [formControlName]="'Password'" #passwordField>
+            <button mat-icon-button type="button"
+                (click)="passwordField.type === 'password' ? passwordField.type = 'text' : passwordField.type = 'password'"
+                matSuffix>
+                <mat-icon class="icon-size-5" *ngIf="passwordField.type === 'password'"
+                    [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+                <mat-icon class="icon-size-5" *ngIf="passwordField.type === 'text'"
+                    [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
+            </button>
+            <mat-error>
+                Password is required
+            </mat-error>
+        </mat-form-field>      
+
+        <!-- Submit button -->
+        <button class="opencops-mat-button-large rounded w-full " mat-flat-button [color]="'primary'"
+            [disabled]="signInForm.disabled" (click)="signIn()">
+            <span *ngIf="!signInForm.disabled">
+                Login
+            </span>
+            <mat-progress-spinner *ngIf="signInForm.disabled" [diameter]="24"
+                [mode]="'indeterminate'"></mat-progress-spinner>
+        </button>
+
+         <!-- Actions -->
+         <div class="inline-flex items-center justify-between w-full mt-4">
+            <a class="text-md font-medium text-primary-500 hover:underline" [routerLink]="['/account/forgot']">Forgot
+                password?
+            </a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,180 @@
+/* Root navigation specific */
+opencops-horizontal-navigation {
+
+    .opencops-horizontal-navigation-wrapper {
+        display: flex;
+        align-items: center;
+
+        /* Basic, Branch */
+        opencops-horizontal-navigation-basic-item,
+        opencops-horizontal-navigation-branch-item {
+
+            @screen sm {
+
+                &:hover {
+
+                    .opencops-horizontal-navigation-item-wrapper {
+                        @apply bg-hover;
+                    }
+                }
+            }
+
+            .opencops-horizontal-navigation-item-wrapper {
+                border-radius: 4px;
+                overflow: hidden;
+
+                .opencops-horizontal-navigation-item {
+                    padding: 0 16px;
+                    cursor: pointer;
+                    user-select: none;
+
+                    .opencops-horizontal-navigation-item-icon {
+                        margin-right: 12px;
+                    }
+                }
+            }
+        }
+
+        /* Basic - When item active (current link) */
+        opencops-horizontal-navigation-basic-item {
+
+            .opencops-horizontal-navigation-item-active,
+            .opencops-horizontal-navigation-item-active-forced {
+
+                .opencops-horizontal-navigation-item-title {
+                    @apply text-primary #{'!important'};
+                }
+
+                .opencops-horizontal-navigation-item-subtitle {
+                    @apply text-primary-400 #{'!important'};
+
+                    .dark & {
+                        @apply text-primary-600 #{'!important'};
+                    }
+                }
+
+                .opencops-horizontal-navigation-item-icon {
+                    @apply text-primary #{'!important'};
+                }
+            }
+        }
+
+        /* Branch - When menu open */
+        opencops-horizontal-navigation-branch-item {
+
+            .opencops-horizontal-navigation-menu-active,
+            .opencops-horizontal-navigation-menu-active-forced {
+
+                .opencops-horizontal-navigation-item-wrapper {
+                    @apply bg-hover;
+                }
+            }
+        }
+
+        /* Spacer */
+        opencops-horizontal-navigation-spacer-item {
+            margin: 12px 0;
+        }
+    }
+}
+
+/* Menu panel specific */
+.opencops-horizontal-navigation-menu-panel {
+
+    .opencops-horizontal-navigation-menu-item {
+        height: auto;
+        min-height: 0;
+        line-height: normal;
+        white-space: normal;
+
+        /* Basic, Branch */
+        opencops-horizontal-navigation-basic-item,
+        opencops-horizontal-navigation-branch-item,
+        opencops-horizontal-navigation-divider-item {
+            display: flex;
+            flex: 1 1 auto;
+        }
+
+        /* Divider */
+        opencops-horizontal-navigation-divider-item {
+            margin: 8px -16px;
+
+            .opencops-horizontal-navigation-item-wrapper {
+                height: 1px;
+                box-shadow: 0 1px 0 0;
+            }
+        }
+    }
+}
+
+/* Navigation menu item common */
+.opencops-horizontal-navigation-menu-item {
+
+    /* Basic - When item active (current link) */
+    opencops-horizontal-navigation-basic-item {
+
+        .opencops-horizontal-navigation-item-active,
+        .opencops-horizontal-navigation-item-active-forced {
+
+            .opencops-horizontal-navigation-item-title {
+                @apply text-primary #{'!important'};
+            }
+
+            .opencops-horizontal-navigation-item-subtitle {
+                @apply text-primary-400 #{'!important'};
+
+                .dark & {
+                    @apply text-primary-600 #{'!important'};
+                }
+            }
+
+            .opencops-horizontal-navigation-item-icon {
+                @apply text-primary #{'!important'};
+            }
+        }
+    }
+
+    .opencops-horizontal-navigation-item-wrapper {
+        width: 100%;
+
+        &.opencops-horizontal-navigation-item-has-subtitle {
+
+            .opencops-horizontal-navigation-item {
+                min-height: 56px;
+            }
+        }
+
+        .opencops-horizontal-navigation-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 48px;
+            width: 100%;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+
+            .opencops-horizontal-navigation-item-title-wrapper {
+
+                .opencops-horizontal-navigation-item-subtitle {
+                    font-size: 12px;
+                }
+            }
+
+            .opencops-horizontal-navigation-item-badge {
+                margin-left: auto;
+
+                .opencops-horizontal-navigation-item-badge-content {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 10px;
+                    font-weight: 600;
+                    white-space: nowrap;
+                    height: 20px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,112 @@
+/* Variables */
+:root {
+    --opencops-vertical-navigation-compact-width: 112px;
+}
+
+opencops-vertical-navigation {
+
+    /* Compact appearance overrides */
+    &.opencops-vertical-navigation-appearance-compact {
+        width: var(--opencops-vertical-navigation-compact-width);
+        min-width: var(--opencops-vertical-navigation-compact-width);
+        max-width: var(--opencops-vertical-navigation-compact-width);
+
+        /* Left positioned */
+        &.opencops-vertical-navigation-position-left {
+
+            /* Side mode */
+            &.opencops-vertical-navigation-mode-side {
+                margin-left: calc(var(--opencops-vertical-navigation-compact-width) * -1);
+            }
+
+            /* Opened */
+            &.opencops-vertical-navigation-opened {
+                margin-left: 0;
+            }
+        }
+
+        /* Right positioned */
+        &.opencops-vertical-navigation-position-right {
+
+            /* Side mode */
+            &.opencops-vertical-navigation-mode-side {
+                margin-right: calc(var(--opencops-vertical-navigation-compact-width) * -1);
+            }
+
+            /* Opened */
+            &.opencops-vertical-navigation-opened {
+                margin-right: 0;
+            }
+
+            /* Aside wrapper */
+            .opencops-vertical-navigation-aside-wrapper {
+                left: auto;
+                right: var(--opencops-vertical-navigation-compact-width);
+            }
+        }
+
+        /* Wrapper */
+        .opencops-vertical-navigation-wrapper {
+
+            /* Content */
+            .opencops-vertical-navigation-content {
+
+                > opencops-vertical-navigation-aside-item,
+                > opencops-vertical-navigation-basic-item {
+
+                    .opencops-vertical-navigation-item-wrapper {
+                        margin: 4px 8px 0 8px;
+
+                        .opencops-vertical-navigation-item {
+                            flex-direction: column;
+                            justify-content: center;
+                            padding: 12px;
+                            border-radius: 6px;
+
+                            .opencops-vertical-navigation-item-icon {
+                                margin-right: 0;
+                            }
+
+                            .opencops-vertical-navigation-item-title-wrapper {
+                                margin-top: 8px;
+
+                                .opencops-vertical-navigation-item-title {
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    text-align: center;
+                                    line-height: 16px;
+                                }
+
+                                .opencops-vertical-navigation-item-subtitle {
+                                    display: none !important;
+                                }
+                            }
+
+                            .opencops-vertical-navigation-item-badge {
+                                position: absolute;
+                                top: 12px;
+                                left: 64px;
+                            }
+                        }
+                    }
+
+                    > opencops-vertical-navigation-collapsable-item {
+                        display: none
+                    }
+
+                    > opencops-vertical-navigation-group-item {
+
+                        > .opencops-vertical-navigation-item-wrapper {
+                            display: none
+                        }
+                    }
+                }
+            }
+        }
+
+        /* Aside wrapper */
+        .opencops-vertical-navigation-aside-wrapper {
+            left: var(--opencops-vertical-navigation-compact-width);
+        }
+    }
+}

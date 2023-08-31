@@ -1,0 +1,28 @@
+
+<h2 class="text-lg font-bold border-b uppercase" mat-dialog-title>Import Weakness</h2>
+<mat-dialog-content class="mat-typography pt-4">
+    <form class="flex flex-col" [formGroup]="addForm">
+        <mat-form-field class="flex-auto">
+            <mat-label>Weakness:</mat-label>
+            <input type="text" placeholder="Search" matInput [formControl]="searchControl" [matAutocomplete]="auto">
+            <mat-autocomplete (optionSelected)="weaknessSelected($event)" #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option.WeaknessId">
+                {{ option.WeaknessName }}
+              </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions class="bg-slate-200 border-t" align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <div class="flex items-center justify-end">
+        <button class="rounded" (click)="create()" mat-flat-button type="button" [color]="'primary'"
+            [disabled]="addForm.invalid">
+            <span class="uppercase" *ngIf="!addForm.disabled">
+                Add
+            </span>
+            <mat-progress-spinner *ngIf="addForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+            </mat-progress-spinner>
+        </button>
+    </div>
+</mat-dialog-actions>

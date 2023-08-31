@@ -1,0 +1,48 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between    dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <a [routerLink]="['../']" class="whitespace-nowrap text-primary-500">Components</a>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_mini:chevron-right'"></mat-icon>
+                    <a [routerLink]="['../']" *ngIf="Section" class="ml-1 text-primary-500">{{Section.SectionName}}</a>
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_mini:chevron-right'"></mat-icon>
+                    New Subsection
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex flex-col w-full mx-auto ">
+        <div class="bg-card rounded border p-4 mt-4">
+            <div
+                class="text-2xl pb-4 border-b pb-4 font-bold tracking-tight leading-7 md:leading-snug truncate uppercase">
+                Create New Subsection</div>
+            <div class="p-4">
+                <form class="flex flex-col" [formGroup]="addForm">
+                    <mat-form-field class="flex-auto max-w-lg">
+                        <mat-label>Name</mat-label>
+                        <input formControlName="SubsectionName" matInput required
+                            >
+                        <mat-error *ngIf="addForm.get('SubsectionName').hasError('required')">
+                            Subsection name is required
+                        </mat-error>
+                    </mat-form-field>
+                    <div class="flex items-center justify-end">
+                        <button class="rounded" (click)="CreateSubsection()" mat-flat-button type="button"
+                            [color]="'primary'" [disabled]="addForm.invalid">
+                            <span class="uppercase" *ngIf="!addForm.disabled">
+                                Create
+                            </span>
+                            <mat-progress-spinner *ngIf="addForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+                            </mat-progress-spinner>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
