@@ -1,4 +1,8 @@
 
+# WASMARF
+
+WASMARF is a comprehensive framework that collects, analyzes, and reports security metrics, empowering organizations to assess and enhance the security of their web applications through data-driven insights. It bridges the gap between potential risks and informed decisions, strengthening defenses in the dynamic digital landscape.
+
 ## Deployment
 
 The repository contains 2 folders opencops-tm-bo (Backend) &  opencops-tm-fe (Frontend).
